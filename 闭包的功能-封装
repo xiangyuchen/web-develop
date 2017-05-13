@@ -1,0 +1,59 @@
+
+-封装
+var Car = function(type){
+  var status = "stop",
+      light = "off";
+  return {
+    type: type,
+    start: function(){
+      status = "driving";
+      light = "on";
+    },
+    stop: function(){
+      status = "stop";
+      light = "off";
+    },
+    getStatus: function(){
+      console.log(type + " is " + status + " with light " + light);
+    }
+  }//return 
+}
+ 
+var audi = new Car("audi");
+audi.start();
+audi.getStatus();
+audi.stop();
+audi.getStatus();
+
+
+
+function Person(){
+	var name="abc";//如果这样去使用，name这个属性是私有的
+var age=90;//也是私有的
+}
+var p1=new Person();
+window.alert(p1.name+" "+p1.age);//错误,name,age私有，p1无法访问
+在类中定义公开的方法（用公开的方法访问私有的属性）
+只要写公开的通通写上this
+function Person(){
+	var name="abc";//如果这样去使用，name这个属性是私有的
+	var age=90;//也是私有的
+	this.name2="abc2";
+	this.show=function (){//这是Person类的公有的方法
+		window.alert(name+" "+age);	
+	}
+	function show2(){//这是Person类的私有的方法，只能在Person类中使用
+  }
+}
+var p1=new Person();
+p1.show();
+解释以上代码：
+this.show=function(){
+	window.alert();
+} //定义Person类的公开方法
+
+function show2(){
+	window.alert();
+}//这是Person类的私有方法，只能在Person类中使用
+var p1=new Person();
+p1.show2();//这里就会报错
